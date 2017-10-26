@@ -1,5 +1,11 @@
+module Enumerable
+  def each_with_custom_index(start, step)
+    self.each { |name| yield(name, start); start+=step} 
+  end
+end
+
 class MoviesController < ApplicationController
-    def index; @movies = Movie.all; end
+    def index; @movies = Movie.order('title'); end
     
     def show
         id = params[:id]
@@ -11,7 +17,7 @@ class MoviesController < ApplicationController
     def create
         @movie = Movie.create!(message_params)
         flash[:notice] = "#{@movie.title} was successfully created."
-        redirect_to movies_path
+        redirect_to movie_path(@movie)
     end
     
     def edit; @movie = Movie.find(params[:id]); end

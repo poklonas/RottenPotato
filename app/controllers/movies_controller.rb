@@ -11,6 +11,7 @@ class MoviesController < ApplicationController
     def create
         @movie = Movie.create!(message_params)
         flash[:notice] = "#{@movie.title} was successfully created."
+        redirect_to movies_path
     end
     
     def edit; @movie = Movie.find(params[:id]); end
@@ -32,33 +33,5 @@ class MoviesController < ApplicationController
     private
     def message_params
         params.require(:movie).permit(:title, :rating, :description, :release_date)
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
     end
 end

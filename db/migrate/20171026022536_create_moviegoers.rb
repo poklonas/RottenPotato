@@ -4,10 +4,10 @@ class CreateMoviegoers < ActiveRecord::Migration
       t.string :name
       t.string :provider, null: false
       t.string :uid, null: false
+      t.timestamps null: false
+    end
       add_index :moviegoers, :provider
       add_index :moviegoers, :uid
       add_index :moviegoers, [:provider, :uid], unique: true
-      t.timestamps null: false
-    end
   end
 end

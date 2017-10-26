@@ -15,11 +15,15 @@ ActiveRecord::Schema.define(version: 20171026022536) do
 
   create_table "moviegoers", force: :cascade do |t|
     t.string   "name"
-    t.string   "provider"
-    t.string   "uid"
+    t.string   "provider",   null: false
+    t.string   "uid",        null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "moviegoers", ["provider", "uid"], name: "index_moviegoers_on_provider_and_uid", unique: true
+  add_index "moviegoers", ["provider"], name: "index_moviegoers_on_provider"
+  add_index "moviegoers", ["uid"], name: "index_moviegoers_on_uid"
 
   create_table "movies", force: :cascade do |t|
     t.string   "title"

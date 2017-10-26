@@ -6,19 +6,10 @@ class MoviesController < ApplicationController
         @movie = Movie.find(id)
     end
     
-    def new; @movie = Movie.new; end
+    def new; end
         
     def create
         @movie = Movie.create!(message_params)
-=begin
-        @movie = Movie.new(message_params)
-        if @movie.save
-           render json: @movie, status: :created
-        else
-           flash[:notice] = "#{@movie.title} was successfully failed."
-           redirect_to movies_path
-        end
-=end
         flash[:notice] = "#{@movie.title} was successfully created."
     end
     

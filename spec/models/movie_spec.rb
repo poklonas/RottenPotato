@@ -4,10 +4,10 @@ RSpec.describe Movie, :type => :model do
     date = DateTime.now
     
     describe "General Propose" do
-        let(:subject) { described_class.create!(title: "anymovie",
-                                            rating: "anyrate",
-                                            description: "anydescript",
-                                            release_date: date) }
+        let(:subject) { described_class.create(title: "anymovie",
+                                               rating: "anyrate",
+                                               description: "anydescript",
+                                               release_date: date) }
                                             
         it 'Get title' do
             subject.title.should == "anymovie"

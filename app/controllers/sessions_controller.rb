@@ -8,10 +8,11 @@ class SessionsController < ApplicationController
         Moviegoer.create_with_omniauth(auth)
       session[:user_id] = user.id
     rescue
-      flash[:warning] = "There was an error while trying to authenticate you..."
+      flash[:warning] = "There was an error."
     end
     redirect_to movies_path
   end
+  
   def destroy
     session.delete(:user_id)
     flash[:notice] = 'Logged out successfully.'

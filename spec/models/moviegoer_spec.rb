@@ -1,11 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Moviegoer, :type => :model do
+    let(:user){ described_class.create( uid: "any id", 
+                                        provider: "any provider",
+                                        name: "any name",
+                                        image: "any image") }
+                                        
     describe "General Propose" do
-        let(:user){ described_class.create( uid: "any id", 
-                                            provider: "any provider",
-                                            name: "any name" ) }
-                   
         it 'Get uid' do
             user.uid.should eq "any id"
         end
@@ -18,22 +19,22 @@ RSpec.describe Moviegoer, :type => :model do
             user.name.should eq "any name"
         end
         
+        it 'Get image path' do
+           user.image.should eq "any image" 
+        end
+        
         it 'Create pass create_with_omniauth method' do
             size_before = Moviegoer.all.size
             auth = Hash.new
             auth["provider"] = "any provider"
             auth["uid"] = "any uid"
-            auth["info"] = { :name => "any name" }
+            auth["info"] = { :name => "any name" , :image => "any link"}
             Moviegoer.create_with_omniauth(auth)
             size_before.should < Moviegoer.all.size
         end
     end
     
     describe "Validation" do
-        let(:user){ described_class.create( uid: "any id", 
-                                            provider: "any provider",
-                                            name: "any name" ) }
-        
         it 'is valid with valid attribute' do
             expect(user).to be_valid
         end
@@ -45,11 +46,7 @@ RSpec.describe Moviegoer, :type => :model do
         it 'is not valid without provider' do
             #pass
         end
-        
-        it 'is not valid without name' do
-            #pass
-        end
-        
+    
     end
 
 end
